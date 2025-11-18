@@ -1,0 +1,8 @@
+---
+- name: shutdown nodes
+  hosts: nodes
+  tasks:
+  - name: shutdown node1
+    community.general.shutdown:  
+      delay: 1
+
