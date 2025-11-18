@@ -26,5 +26,7 @@ vim inventory
 
 ```bash
 vim init.sh
+```
+```bash
 ./init.sh
 ```
