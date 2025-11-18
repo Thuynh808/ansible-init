@@ -6,7 +6,7 @@ Ansible Bootstrap
 
 ```bash
 yum update -y && yum upgrade -y
-yum install -y ansible-core git
+yum install -y ansible-core git sshpass
 ```
 
 - **Clone repo**
