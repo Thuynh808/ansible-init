@@ -9,9 +9,10 @@
     when: ansible_os_family == 'RedHat'
   - name: update all packages (Debian)
     apt:
-      upgrade: yes
       update_cache: yes
+      upgrade: dist
     when: ansible_os_family == 'Debian'
+    ignore_errors: true
   - name: install packages
     yum:
       name: "{{ item }}"
@@ -36,7 +37,7 @@
   tasks:
   - name: ensure ssh root login is enabled
     lineinfile:
-      path: /etc/sshd/sshd_config
+      path: /etc/ssh/sshd_config
       state: present
       regex: "{{ item.regex }}"
       line: "{{ item.line }}"
@@ -57,7 +58,7 @@
     when: ansible_os_family == 'Debian'
   - name: generate root ssh key pair
     community.crypto.openssh_keypair:
-      path: /root/.ssh/myansible.pub
+      path: /root/.ssh/myansible
       owner: root
       group: root
     when: inventory_hostname in groups['local']
@@ -69,7 +70,7 @@
     when: inventory_hostname in groups['nodes']
   - name: generate /etc/hosts file with template
     template:
-      src: ../files/etc_hosts.j2
+      src: ../etc_hosts.j2
       dest: /etc/hosts
   - name: toggle off ask_pass
     lineinfile:
@@ -77,3 +78,7 @@
       regex: '^ask_pass'
       line: 'ask_pass=false'
     when: inventory_hostname in groups['local']
+
+
+  - name: cat hosts file
+    command: 'cat /etc/hosts'
