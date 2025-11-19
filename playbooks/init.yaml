@@ -21,6 +21,7 @@
       - python3
       - vim-enhanced
       - bash-completion
+      - policycoreutils-python-utils
     when: ansible_os_family == 'RedHat'
   - name: install packages
     apt:
