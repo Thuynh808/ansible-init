@@ -1,21 +1,32 @@
 ---
 - name: shutdown nodes
-  hosts: mon1
+  hosts: nas1
+  ignore_errors: true
   tasks:
   - name: shutdown
     community.general.shutdown:
       delay: 0
 
 - name: shutdown nodes
-  hosts: jump01
+  hosts: soc1
+  ignore_errors: true
   tasks:
   - name: shutdown
     community.general.shutdown:
-      delay: 2
+      delay: 0
+
+- name: shutdown nodes
+  hosts: mon1
+  ignore_errors: true
+  tasks:
+  - name: shutdown
+    community.general.shutdown:
+      delay: 0
 
 - name: shutdown nodes
   hosts: pve1
+  ignore_errors: true
   tasks:
   - name: shutdown
     community.general.shutdown:
-      delay: 7
+      delay: 5
